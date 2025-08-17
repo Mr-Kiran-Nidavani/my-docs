@@ -1,1 +1,5 @@
-site_name: My Docs
+site_name: My Docs Project
+
+nav:
+  - Home: index.md
+  - Prompt Engineering: promptEngineering.md
