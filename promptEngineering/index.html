@@ -76,24 +76,12 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#prompt-engineering" class="nav-link">Prompt Engineering</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#types-of-prompts" class="nav-link">Types of Prompts</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#prompt-formats" class="nav-link">Prompt Formats</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
+            
+            
+            
+            
             <li class="nav-item" data-bs-level="2"><a href="#references" class="nav-link">References</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -101,51 +89,165 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="prompt-engineering">Prompt Engineering</h1>
+<h3 id="prompt-engineering"><span style="color: blue"> <strong>Prompt Engineering</strong> </span></h3>
 <p>Prompt engineering is the process of designing and refining prompts to effectively interact with AI language models. It involves crafting inputs that guide the model to produce desired outputs, improving accuracy, relevance, and usefulness.</p>
-<h2 id="types-of-prompts">Types of Prompts</h2>
-<h3 id="1-instructional-prompts">1. Instructional Prompts</h3>
-<p>Direct the model to perform a specific task.</p>
-<pre><code class="language-markdown">Summarize the following article in three sentences.
-</code></pre>
-<h3 id="2-completion-prompts">2. Completion Prompts</h3>
-<p>Provide a partial input and ask the model to complete it.</p>
-<pre><code class="language-markdown">Once upon a time, in a distant land,
-</code></pre>
-<h3 id="3-question-answer-prompts">3. Question-Answer Prompts</h3>
-<p>Pose a question for the model to answer.</p>
-<pre><code class="language-markdown">What are the benefits of renewable energy?
-</code></pre>
-<h3 id="4-few-shot-prompts">4. Few-Shot Prompts</h3>
-<p>Include examples to guide the model's response.</p>
-<pre><code class="language-markdown">Translate English to French:
-- Hello → Bonjour
-- Thank you → Merci
-- Good night →
-</code></pre>
-<h3 id="5-zero-shot-prompts">5. Zero-Shot Prompts</h3>
-<p>Ask the model to perform a task without examples.</p>
-<pre><code class="language-markdown">Classify the sentiment of this review: &quot;The product exceeded my expectations.&quot;
-</code></pre>
-<h3 id="6-chain-of-thought-prompts">6. Chain-of-Thought Prompts</h3>
-<p>Encourage the model to explain its reasoning step by step.</p>
-<pre><code class="language-markdown">If there are 3 apples and you take away 2, how many are left? Let's think step by step.
-</code></pre>
-<h2 id="prompt-formats">Prompt Formats</h2>
-<ul>
-<li><strong>Plain Text:</strong> Simple instructions or questions.</li>
-<li><strong>Markdown:</strong> Structured formatting for clarity.</li>
-<li><strong>Code Blocks:</strong> For programming-related tasks.</li>
-<li><strong>Lists and Tables:</strong> Organize information for better comprehension.</li>
+<h3 id="prompt-as-2-main-elements"><span style="color: blue"> <strong>Prompt as 2 main elements</strong> </span></h3>
+<h4 id="prompt-parameters-summary">🔧 <span style="color: green"> <strong>Prompt Parameters (Summary)</strong> </span></h4>
+<ol>
+<li><strong>Temperature</strong>    <br />
+    Controls how creative or random the response is.<ul>
+<li>Lower values like <code>0.0</code> make answers more exact and predictable (good for code).</li>
+<li>Higher values like <code>0.7–0.8</code> make answers more creative and varied.       </li>
 </ul>
-<h2 id="best-practices">Best Practices</h2>
-<ul>
-<li>Be clear and specific.</li>
-<li>Provide context when necessary.</li>
-<li>Use examples for complex tasks.</li>
-<li>Iterate and refine prompts based on output quality.</li>
+</li>
+<li><strong>Top-p</strong>   <br />
+    Controls how many word choices the model considers.<ul>
+<li>Higher values allow more creative and diverse answers.</li>
+<li>Often used together with temperature. </li>
 </ul>
-<h2 id="references">References</h2>
+</li>
+<li><strong>Max length</strong>  <br />
+    Limits how long the response can be (in tokens, which are words or parts of words).<ul>
+<li>Helps keep responses short and manage cost.</li>
+</ul>
+</li>
+</ol>
+<h4 id="key-structure-of-a-good-prompt">✅ <span style="color: green"> <strong>Key Structure of a Good Prompt</strong> </span></h4>
+<ol>
+<li>
+<p><strong>Context</strong><br />
+   Give some background so the model understands the situation.<br />
+<em>Example:</em> Act as an analyst for an OTT platform. You will do sentiment analysis on customer feedback.       </p>
+</li>
+<li>
+<p><strong>Instruction</strong><br />
+   Tell the model what task to do.<br />
+<em>Example:</em> Classify feedback as positive (promoter), negative (demoter), or neutral (neither).</p>
+</li>
+<li>
+<p><strong>Input Data</strong><br />
+   Share the actual question or content you want a response for.<br />
+<em>Example:</em> Feedback - "The storyline was repetitive and abysmal."</p>
+</li>
+<li>
+<p><strong>Example</strong>: Show sample input and expected output to guide the model. <br />
+    &gt; feedback: "The series was okay" → Sentiment: neutral<br />
+    &gt; feedback: "The acting was awesome" → Sentiment: positive/promoter</p>
+</li>
+<li>
+<p><strong>Response Format</strong><br />
+   Tell the model how the output should look.  l=
+   Example: Output - negative, json, tablue etc</p>
+</li>
+</ol>
+<h3 id="prompt-checklist"><span style="color: blue"><strong>✅ Prompt Checklist</strong></span></h3>
+<ol>
+<li>
+<p><strong>Give context</strong><br />
+Provide background information to help the model understand the task.<br />
+<strong>Example:</strong> You are helping analyze customer reviews for a streaming platform.</p>
+</li>
+<li>
+<p><strong>Create a role</strong><br />
+Tell the model what role it should take. This shapes how it responds.<br />
+<strong>Example:</strong> Act as a data analyst.</p>
+</li>
+<li>
+<p><strong>Define the goal</strong><br />
+Clearly state what you want the model to do. Be specific.<br />
+<strong>Example:</strong> Classify each review as positive, negative, or neutral.</p>
+</li>
+<li>
+<p><strong>Clarify the audience</strong><br />
+Say who will use or read the output. This affects the tone and format.<br />
+<strong>Example:</strong> The output is for the product team to improve user experience.</p>
+</li>
+<li>
+<p><strong>Detail the output format</strong><br />
+Explain how you want the response to look (bullet points, JSON, table, etc.).<br />
+<strong>Example:</strong> Return the result in this format: <code>Feedback: [text] → Sentiment: [label]</code></p>
+</li>
+<li>
+<p><strong>Give examples</strong><br />
+Provide input-output samples to guide the model.<br />
+<strong>Example:</strong>  </p>
+<ul>
+<li>Feedback: "The acting was great" → Sentiment: positive  </li>
+<li>Feedback: "It was okay" → Sentiment: neutral</li>
+</ul>
+</li>
+<li>
+<p><strong>Specify style or tone</strong><br />
+Mention the desired tone or writing style (formal, casual, concise, etc.).<br />
+<strong>Example:</strong> Keep the tone professional and concise.</p>
+</li>
+<li>
+<p><strong>Define the scope</strong><br />
+Clarify what to include or exclude in the response.<br />
+<strong>Example:</strong> Only focus on the emotional tone of the feedback, not grammar or length.</p>
+</li>
+<li>
+<p><strong>Apply restrictions or rules</strong><br />
+Set clear limits to avoid unwanted results.<br />
+<strong>Example:</strong> Do not generate examples. Do not explain the output.</p>
+</li>
+<li>
+<p><strong>(Optional) Add fallback instructions</strong><br />
+Tell the model what to do if it can't complete the task.<br />
+<strong>Example:</strong> If unsure, respond with “Cannot determine sentiment.”</p>
+</li>
+</ol>
+<h3 id="prompt-patterns"><span style="color: blue"><strong><em>✨ Prompt Patterns </em></strong></span></h3>
+<ol>
+<li>
+<p><strong>Persona Pattern</strong><br />
+   Ask the model to take on a specific role.<br />
+<strong>Format:</strong> Act as X, do task Y.<br />
+<strong>Example:</strong> Act as a career coach and help me write a resume summary.</p>
+</li>
+<li>
+<p><strong>Audience Persona Pattern</strong><br />
+   Tailor the explanation for a specific audience.<br />
+<strong>Format:</strong> Explain X assuming I am Y.<br />
+<strong>Example:</strong> Explain blockchain to me like I’m a 10-year-old.</p>
+</li>
+<li>
+<p><strong>Visualization Generator Pattern</strong><br />
+   Ask the model to create content usable by another tool or system.<br />
+<strong>Format:</strong> Generate X that can be used with tool Y.<br />
+<strong>Example:</strong> Generate a flowchart outline that can be used in draw.io.</p>
+</li>
+<li>
+<p><strong>Recipe Pattern</strong><br />
+   Request a step-by-step process for completing a task.<br />
+<strong>Format:</strong> In order to do X, provide steps A, B, C...<br />
+<strong>Example:</strong> In order to create a business plan, give me the full sequence of steps from research to presentation.</p>
+</li>
+<li>
+<p><strong>Template Pattern</strong><br />
+   Provide a structure with placeholders, and ask the model to fill in the content.<br />
+<strong>Format:</strong> I will provide a template; fill in the placeholders.<br />
+<strong>Example:</strong> Here’s an email template with [name], [date], and [action] — fill it out for a meeting reminder.</p>
+</li>
+<li>
+<p><strong>Few-Shot Prompts</strong><br />
+Give some examples first, then ask the model to continue or follow the pattern.<br />
+<em>Example:</em><br />
+Translate English to French:  </p>
+<ul>
+<li>Hello → Bonjour  </li>
+<li>Thank you → Merci  </li>
+<li>Good night →</li>
+</ul>
+</li>
+<li>
+<p><strong>Zero-Shot Prompts</strong>
+Ask the model to do a task without giving any examples.<br />
+<em>Example:</em><br />
+Classify this review as positive, negative, or neutral: "The movie was fantastic and engaging."</p>
+</li>
+</ol>
+<h2 id="references"><span style="color: blue"> References </span></h2>
 <ul>
 <li><a href="https://platform.openai.com/docs/guides/prompt-engineering">OpenAI Cookbook: Prompt Engineering</a></li>
 <li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
